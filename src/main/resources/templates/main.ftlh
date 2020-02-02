@@ -1,8 +1,9 @@
-<#import "parts/login.ftl" as l>
+<#import "parts/common.ftlh" as c>
+<#import "parts/login.ftlh" as lo>
 
 <@c.page>
     <div>
-        <@l.logout/>
+        <@lo.logout/>
     </div>
     <div>
         <form method="post">
@@ -13,17 +14,16 @@
         </form>
     </div>
     <div>Список сообщений</div>
-    <form method="post" action="filter">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="text" name="filter">
+    <form method="get" action="/main">
+        <input type="text" name="filter" value="${filter}">
         <button type="submit">Найти</button>
     </form>
-    <#list messages as messages>
+    <#list messages as message>
     <div>
-        <b>${messages.id}</b>
-        <span>${messages.text}</span>
-        <i>${messages.tag}</i>
-        <strong>${nessages.authorName}</strong>
+        <b>${message.id}</b>
+        <span>${message.text}</span>
+        <i>${message.tag}</i>
+        <strong>${message.authorName}</strong>
     </div>
         <#else>
         Mo messages
